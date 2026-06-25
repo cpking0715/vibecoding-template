@@ -1,0 +1,16 @@
+---
+description: "每个功能维护 .vibecoding/ 下的长期记忆文件（PRD/Design/Acceptance/Evolution），AI启动时读取上下文"
+globs: "*.ts, *.tsx, *.md"
+---
+# 开发记忆机制
+
+## 必须维护的文件
+- `.vibecoding/prd.md` — 产品需求文档
+- `.vibecoding/design.md` — 设计方案
+- `.vibecoding/acceptance.md` — 验收标准
+- `.vibecoding/evolution.md` — 追加式记忆（永不覆盖）
+
+## 规则
+1. evolution.md 只追加不覆盖
+2. 每个 Phase 完成后追加记录
+3. AI 启动时先读 evolution.md 取上下文

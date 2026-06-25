@@ -1,0 +1,1 @@
+@VIBECODING-RULES.md

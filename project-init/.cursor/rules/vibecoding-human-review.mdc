@@ -1,0 +1,18 @@
+---
+description: "安全敏感代码自动检测，AI 扫描+CI门禁双重保障，含触发机制"
+globs: "*.ts, *.tsx, *.py"
+---
+# 人工审核哨兵
+
+## 触发场景（AI 自动扫描）
+- 支付/计费: amount, price, charge, subscription
+- 认证/权限: login, token, role, permission
+- 数据安全: encrypt, decrypt, key, privacy
+- 架构变更: table, schema, migration, version
+
+## 触发机制
+1. AI 提交前扫描 diff，检测敏感逻辑
+2. 检测到后自动在 PR 追加 `⚠️ NEEDS HUMAN REVIEW`
+3. PR 自动标记 draft + 阻止合并
+
+其余常规代码无需人工审核。

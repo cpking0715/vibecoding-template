@@ -1,0 +1,16 @@
+---
+description: "新功能完成时自动生成文档，按约定位置写入（docs/api/、.env.example、README）"
+globs: "*.md"
+---
+# 文档自动生成
+
+## 文档位置约定
+| 变更类型 | 位置 |
+|---------|------|
+| 新增 API | `docs/api/<module>.md` |
+| 新增配置 | `.env.example` + `README.md` |
+| 修改行为 | `README.md` 变更摘要 |
+| 新增依赖 | `README.md` 依赖章节 |
+
+## 生成方式
+T1 模型（Haiku / Qwen-Turbo）基于代码静态分析生成，追加而非覆盖。

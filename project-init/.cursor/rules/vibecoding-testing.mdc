@@ -1,0 +1,24 @@
+---
+description: "综合验收测试：功能/安全/性能/异常/兼容性/数据库，全链路验证"
+globs: "*.ts, *.tsx, *.py, *.json"
+---
+# 综合验收测试
+
+Phase 3.5 执行以下测试：
+
+## 业务功能测试
+- E2E 覆盖 acceptance.md 所有场景
+- 命令: `npm run test:e2e` / `npx vitest run e2e/`
+
+## 安全测试
+- `npm audit` — 依赖漏洞
+- AI 扫描 — 越权/注入/硬编码密钥
+
+## 性能测试
+- 关键 API: `npx autocannon -c 10 -d 10`
+- 通过: p95 ≤ 500ms, 错误率 ≤ 1%
+
+## 异常/兼容/数据库
+- 按 testing-spec.md 执行
+
+全部通过后进入 Phase 5 (文档) + Phase 6 (合入)。

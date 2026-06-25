@@ -1,0 +1,30 @@
+---
+description: "手动模型切换指引——按 Phase 切换模型以达到成本和质量最佳平衡"
+globs: "*"
+---
+# 手动模型切换指引（Cursor 版）
+
+Cursor 不支持自动 Subagent。要按我们的模型分层策略来节省成本，请按以下步骤手动切换。
+
+完整指南见 Skill 参考文件 `references/manual-model-routing.md`。
+
+## 快速切换表
+
+```
+Phase 0b 架构设计    → 切到 Opus     → 完事切回 Sonnet
+Phase 2b 写测试      → 切到 Haiku    → 进 2c 前切回 Sonnet
+Phase 2c 核心/安全   → 切到 Opus     → 完事切回 Sonnet
+Phase 2e lint 修复   → 切到 Haiku    → 修完切回 Sonnet
+Phase 3 第3次修复   → 切到 Opus     → 修完切回 Sonnet
+Phase 4 敏感扫描    → 切到 Opus     → 审完切回 Sonnet
+Phase 5 写文档      → 切到 Haiku    → 进 6 前切回 Sonnet
+```
+
+## 快捷切换
+
+`Cmd+Shift+P` → "Switch Model" → 选择模型
+切换后对话上下文不会丢失。
+
+## 不想切？
+
+全程用 Sonnet。每月多花 ~$5，省掉手动切换的麻烦。
