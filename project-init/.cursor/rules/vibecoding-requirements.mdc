@@ -2,6 +2,7 @@
 description: "新功能需求必须包含功能描述、边界条件、业务规则三要素"
 globs: "*.md, *.ts, *.tsx, *.py"
 ---
+<!-- 权威来源: VIBECODING-RULES.md，本文件为 Cursor 适配精简版 -->
 # 需求模板规则
 
 ## 需求必须包含三要素

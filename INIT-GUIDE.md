@@ -26,6 +26,7 @@ TARGET=/path/to/your-project
 mkdir -p $TARGET/.codex/rules
 mkdir -p $TARGET/.cursor/rules
 mkdir -p $TARGET/.github
+mkdir -p $TARGET/docs
 
 # 复制规则
 cp project-init/.codex/rules/* $TARGET/.codex/rules/
@@ -33,6 +34,9 @@ cp project-init/.cursor/rules/* $TARGET/.cursor/rules/
 cp project-init/VIBECODING-RULES.md $TARGET/
 cp project-init/CLAUDE.md $TARGET/
 cp project-init/.github/PULL_REQUEST_TEMPLATE.md $TARGET/.github/
+
+# 复制全局参考文档
+cp project-init/docs/* $TARGET/docs/
 
 # 创建 .vibecoding/ 和 .gitignore（如果不存在）
 mkdir -p $TARGET/.vibecoding/logs
@@ -46,15 +50,40 @@ echo ".vibecoding/" >> $TARGET/.gitignore 2>/dev/null
 
 ### 第 4 步：验证安装
 
-在目标项目中输入：
-
+**Codex**：在目标项目中输入：
 > "用 VibeCoding 工作流开发一个简单的功能"
 
 如果 Codex 回复工作流启动信息，说明安装成功。
 
+**Cursor**：打开目标项目，Cursor 会自动加载 `.cursor/rules/` 下的规则文件。
+
+**Claude Code**：在目标项目中输入：
+> "按照 VIBECODING-RULES.md 的工作流，开发一个简单的功能"
+
+Claude Code 会按 CLAUDE.md 入口 → VIBECODING-RULES.md 规则 → Phase 0→6 流程执行。
+
+---
+
+## 各工具使用方式
+
+| 工具 | 初始化方式 | 规则加载机制 |
+|------|-----------|------------|
+| **Codex** | 安装 Skill + 复制 `.codex/rules/` | Skill 自动编排 + 7 个规则文件 |
+| **Cursor** | 复制 `.cursor/rules/` | 7 个 `.mdc` 文件，按 glob 匹配自动加载 |
+| **Claude Code** | 复制 `CLAUDE.md` + `VIBECODING-RULES.md` + `docs/` | CLAUDE.md 入口 → @VIBECODING-RULES.md → docs/ 参考文件 |
+
+**核心原则**：`VIBECODING-RULES.md` 是所有工具共享的单一真相来源。工具专属规则文件（`.codex/rules/`、`.cursor/rules/`）只做适配，不重复定义规则。
+
 ---
 
 ## 常见问题
+
+### Q: Claude Code 和 Codex / Cursor 的工作流有什么区别？
+
+Claude Code 没有 Skill 自动编排和 `.mdc` glob 匹配机制。它的工作方式：
+- 启动时读取 `CLAUDE.md`（入口）→ `VIBECODING-RULES.md`（规则）→ 按 Phase 0→6 流程执行
+- 用户说「按照 VibeCoding 工作流开发 XXX」即可启动
+- 规则全部在 `VIBECODING-RULES.md` 中，不分散到多个工具专属文件
 
 ### Q: 我的项目不是 Node.js/TypeScript，可以用吗？
 

@@ -2,6 +2,7 @@
 description: "综合验收测试：功能/安全/性能/异常/兼容性/数据库，全链路验证"
 globs: "*.ts, *.tsx, *.py, *.json"
 ---
+<!-- 权威来源: VIBECODING-RULES.md，本文件为 Cursor 适配精简版 -->
 # 综合验收测试
 
 Phase 3.5 执行以下测试：

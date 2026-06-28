@@ -2,6 +2,7 @@
 description: "安全敏感代码自动检测，AI 扫描+CI门禁双重保障，含触发机制"
 globs: "*.ts, *.tsx, *.py"
 ---
+<!-- 权威来源: VIBECODING-RULES.md，本文件为 Cursor 适配精简版 -->
 # 人工审核哨兵
 
 ## 触发场景（AI 自动扫描）

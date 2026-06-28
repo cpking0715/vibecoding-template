@@ -24,7 +24,7 @@ vibecoding-template/
 │
 ├── project-init/                      ← 新项目初始化文件（复制到项目）
 │   ├── .codex/rules/                  Codex 项目规则（7 个）
-│   ├── .cursor/rules/                 Cursor 规则（6 个）
+│   ├── .cursor/rules/                 Cursor 规则（7 个）
 │   ├── VIBECODING-RULES.md            Claude Code 规则
 │   ├── CLAUDE.md                      Claude Code 入口
 │   └── .github/PULL_REQUEST_TEMPLATE.md  PR 模板
@@ -52,17 +52,22 @@ cp -r vibecoding-template/project-init/.codex/ <已有项目>/.codex/
 cp vibecoding-template/project-init/VIBECODING-RULES.md <已有项目>/
 cp vibecoding-template/project-init/CLAUDE.md <已有项目>/
 cp -r vibecoding-template/project-init/.cursor/ <已有项目>/.cursor/  # 如果用 Cursor
+cp -r vibecoding-template/project-init/docs/ <已有项目>/docs/        # 全局参考文档
 ```
 
 然后修改 `<已有项目>/.codex/rules/vibecoding-tdd.md` 中的项目上下文（Phase 0 会自动检测同步，也可手动改）。
 
-### Skill 安装
+> **VIBECODING-RULES.md 是所有工具的单一真相来源**：Codex rules 和 Cursor rules 只做工具适配，不重复定义规则。Claude Code 通过 CLAUDE.md → @VIBECODING-RULES.md 加载全部规则。
+
+### Skill 安装（仅 Codex 需要）
 
 Skill 已全局安装在 `~/.codex/skills/vibe-coding-workflow/`。如需手动安装：
 
 ```bash
 cp -r vibecoding-template/skill-copy/ ~/.codex/skills/vibe-coding-workflow/
 ```
+
+Cursor 和 Claude Code 不需要安装 Skill — 它们通过 `.cursor/rules/` 和 `CLAUDE.md` 直接加载规则。
 
 ## 快速参考
 

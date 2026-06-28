@@ -2,6 +2,7 @@
 description: "新功能完成时自动生成文档，按约定位置写入（docs/api/、.env.example、README）"
 globs: "*.md"
 ---
+<!-- 权威来源: VIBECODING-RULES.md，本文件为 Cursor 适配精简版 -->
 # 文档自动生成
 
 ## 文档位置约定

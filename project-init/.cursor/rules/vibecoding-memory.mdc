@@ -2,6 +2,7 @@
 description: "每个功能维护 .vibecoding/ 下的长期记忆文件（PRD/Design/Acceptance/Evolution），AI启动时读取上下文"
 globs: "*.ts, *.tsx, *.md"
 ---
+<!-- 权威来源: VIBECODING-RULES.md，本文件为 Cursor 适配精简版 -->
 # 开发记忆机制
 
 ## 必须维护的文件

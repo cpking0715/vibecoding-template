@@ -12,9 +12,20 @@
 
 ## 流程总览
 
-Phase 0(PRD+Design) → Phase 1(拆解) → Phase 2(TDD) ⇄ Phase 3(修复) → Phase 3.5(综合验收测试) → Phase 4(安全) → Phase 5(文档) → Phase 6(合入)
+Phase 0(PRD+Design) → Phase 0.5(验收场景) → [Phase 0.8(并行评估·可选)] → Phase 1(拆解) → Phase 2(TDD) ⇄ Phase 3(修复) → Phase 3.5(综合验收测试) → Phase 4(安全) → Phase 5(文档) → Phase 6(合入)
 
 【每个 Phase 完成后追加 evolution.md】
+
+## 置信度门禁
+
+**遇到以下情况必须停止编码，先提问确认，不得猜测后继续：**
+
+- 技术方案存在多种合理选择（如 Redis vs 内存缓存）
+- 不确定某个 API / 库 / 配置项的行为或是否存在
+- 需求描述存在歧义，可能理解成多种方式
+- 修改可能影响不熟悉的模块
+
+提问格式：说明不确定的点 → 列出可选方案（含推荐）→ 等待用户确认 → 继续。
 
 ## TDD 工作流（Red-Green-Refactor）
 
@@ -65,8 +76,52 @@ AI 自动扫描，检测支付/认证/安全/架构变更后自动标记 PR + CI
 
 新功能完成时生成文档，按约定位置写入（docs/api/、.env.example、README）。
 
-## 开发记忆
+## 全局参考文档
 
-- 每个功能维护 `.vibecoding/prd.md`、`design.md`、`acceptance.md`、`evolution.md`
-- evolution.md 只追加不覆盖
-- AI 启动时先读 evolution.md 取上下文
+AI 在开始任何编码任务前，必须先读取 `docs/` 下的全局参考文件。这些文件定义项目的全局边界和已知经验。
+
+| 文件 | 用途 | 读取时机 |
+|------|------|---------|
+| `docs/SPEC.md` | 产品身份 + 核心功能 + 明确非目标 | 每次任务开始时 |
+| `docs/DECISIONS.md` | 架构决策记录（为什么这样设计） | 涉及架构/选型时 |
+| `docs/ERROR_LIBRARY.md` | 领域错误模式库 | 遇到错误时先搜索 |
+| `docs/CHANGELOG.md` | 需求/设计变更记录 + 设计同步协议 | PRD/设计变更时 |
+
+**规则**：
+- SPEC.md 中标记为「非目标」的功能，AI 不得自行实现
+- DECISIONS.md 中已记录的决策，AI 不得重新质疑（除非用户明确要求）
+- 遇到错误时，AI 必须先搜索 ERROR_LIBRARY.md 匹配已知模式，不得直接猜测修复
+
+## 变更管理与设计同步
+
+**核心原则**：PRD 或设计文档的任何变更，必须同步到所有受影响的下游产物。
+
+**强制流程**（参见 `docs/CHANGELOG.md` 中的完整协议）：
+
+1. **记录变更** → CHANGELOG.md（CHG-xxx）
+2. **评估设计影响** → 检查 API / DB / 前端 / 测试是否受影响
+3. **更新下游产物** → design.md / acceptance.md / requirements.md
+4. **追加 evolution.md** → 记录变更摘要
+5. **重新校验** → 受影响 Step 的测试重新运行
+
+**规则**：
+- 不得跳过任何一步
+- 影响分析必须在修改代码前完成
+- 已完成的 Step 如果受影响，必须回滚或追加修复 Step
+
+## 任务完成检查清单（Quality Gate）
+
+**声明"任务完成"前，以下必须全部通过：**
+
+| # | 检查项 | 来源 |
+|---|--------|------|
+| ☐ | 所有 Step 测试通过 | Phase 2 |
+| ☐ | Lint 通过（全仓库） | Phase 2e |
+| ☐ | Typecheck 通过（全仓库） | Phase 2e |
+| ☐ | 6 类验收测试通过（适用项） | Phase 3.5 |
+| ☐ | 安全扫描无 Critical/High | Phase 4 |
+| ☐ | CHANGELOG.md 已追加（如有变更） | 变更管理 |
+| ☐ | evolution.md 已追加 | Phase 完成 |
+| ☐ | Docs 已生成/更新 | Phase 5 |
+
+未全部通过 → **不得合入**，回对应 Phase 修复。

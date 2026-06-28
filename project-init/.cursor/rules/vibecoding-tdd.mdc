@@ -2,6 +2,7 @@
 description: "严格 TDD 工作流（Red-Green-Refactor，小步快跑，禁止提前写业务代码）通用模板，首次使用时自动同步项目上下文"
 globs: "*.ts, *.tsx, *.py, *.go"
 ---
+<!-- 权威来源: VIBECODING-RULES.md，本文件为 Cursor 适配精简版 -->
 # TDD 工作流（测试驱动开发）
 
 严格 TDD 流程，绝对禁止一次性生成完整业务代码。
