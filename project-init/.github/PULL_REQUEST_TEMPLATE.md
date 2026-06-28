@@ -1,9 +1,3 @@
-# PR 模板
-
-新项目初始化时，将此文件复制到 `.github/PULL_REQUEST_TEMPLATE.md`。
-如果 `.github/` 目录不存在则创建。
-
-```markdown
 ---
 name: VibeCoding Pull Request
 about: 使用 VibeCoding 工作流完成的功能
@@ -37,4 +31,3 @@ about: 使用 VibeCoding 工作流完成的功能
 - [ ] 文档已更新（docs/api/ / README / .env.example）
 - [ ] evolution.md 已追加
 - [ ] Phase 4 安全扫描通过（或已标记 NEEDS HUMAN REVIEW）
-```

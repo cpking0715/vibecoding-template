@@ -6,7 +6,7 @@ globs: "*"
 
 Cursor 不支持自动 Subagent。要按我们的模型分层策略来节省成本，请按以下步骤手动切换。
 
-完整指南见 Skill 参考文件 `references/manual-model-routing.md`。
+详细说明见 `docs/MODEL_ROUTING.md`。
 
 ## 快速切换表
 

@@ -41,7 +41,7 @@ Phase 0(PRD+Design) → Phase 0.5(验收场景) → [Phase 0.8(并行评估·可
 
 ## 综合验收测试（Phase 3.5）
 
-全链路验证，详见 testing-spec.md。
+全链路验证，详见 `docs/TESTING_SPEC.md`。
 
 | 测试类型 | 自动程度 | 通过标准 |
 |---------|---------|---------|

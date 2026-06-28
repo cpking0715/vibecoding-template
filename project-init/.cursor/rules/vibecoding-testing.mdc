@@ -20,6 +20,6 @@ Phase 3.5 执行以下测试：
 - 通过: p95 ≤ 500ms, 错误率 ≤ 1%
 
 ## 异常/兼容/数据库
-- 按 testing-spec.md 执行
+- 按 `docs/TESTING_SPEC.md` 执行
 
 全部通过后进入 Phase 5 (文档) + Phase 6 (合入)。
