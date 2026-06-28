@@ -30,12 +30,15 @@ Phase 0(PRD+Design) → Phase 0.5(验收场景) → [Phase 0.8(并行评估·可
 ## TDD 工作流（Red-Green-Refactor）
 
 严格遵循 Red-Green-Refactor：
-1. **拆解需求** → Micro-steps（五原则）
+1. **拆解需求** → Micro-steps（五原则：一个 step = 一个 Given-When-Then，≤3 个 test case，不可再分，≤2 个文件，先骨架后肉）
 2. **验收标准** → Given-When-Then
-3. **Red** → 仅写测试，停等确认
-4. **Green** → 仅写最少实现代码
-5. **Refactor** → 只做 extract/rename/simplify
-6. **每个 Step 独立 commit** → 可精确回滚
+3. **Red** → 仅写测试。生成后立即停止，并提示用户："测试代码已生成，请运行测试并告诉我结果，或授权我运行它。"
+4. **等待确认** → 在用户反馈测试结果（或确认测试失败）之前，绝对禁止编写任何业务实现代码。
+5. **Green** → 仅写能让测试通过的最少业务代码。
+6. **运行验证** → 运行测试确保全部通过。如失败，分析输出并修复直到通过。
+7. **Refactor** → 在测试保护下，消除重复、提升可读性（只做 extract/rename/simplify），再次确认测试通过。
+8. **更新文档 → git commit** → 每个 Step 独立 commit，可精确回滚
+9. **循环** → 完成当前单元后，询问用户是否进入下一个单元。
 
 **禁令**：禁止在测试验证通过前写业务代码；禁止跳过测试运行；禁止一次性处理过大需求。
 
